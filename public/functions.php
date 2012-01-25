@@ -23,13 +23,17 @@ function varnishPurge ($txtUrl) {
 		$cmd .= "\r\n";
 
 		// Send the request
-		echo "Sending: <pre>". $cmd ."</pre>";
+		echo "Sending request: <blockquote>". nl2br($cmd) ."</blockquote>";
 		fwrite($varnish_sock, $cmd);
-		echo "Received: <pre>";
+
+		// Get the reply
+		echo "Received answer: <blockquote>";
+		$response = "";
 		while (!feof($varnish_sock)) {
-			echo fgets($varnish_sock, 128);
+			$response .= fgets($varnish_sock, 128);
 		}
-		echo "</pre>";
+		echo nl2br($response);
+		echo "</blockquote>";
 	}
 
 	// Close the socket
