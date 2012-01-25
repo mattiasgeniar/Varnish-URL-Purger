@@ -1,3 +1,6 @@
+<?php
+	require_once('functions.php');
+?>
 <html>
 <head>
 <title>Varnish URL purger</title>
@@ -11,11 +14,8 @@
 
 <?php
 	if (isset($_POST['cmdSubmit'])) {
-		// URL encode the entire input string
-		$txtUrl = urlencode($_POST['txtURL']);
-
-		// By URL encoding the entire input, it's also translated "http://", let's get that back
-		$txtUrl = str_replace("http%3A%2F%2F", "http://", $txtUrl);
+		// Get the input string, don't sanitize?
+		$txtUrl = $_POST['txtURL'];
 
 		// Ok, purge it
 		varnishPurge($txtUrl);
