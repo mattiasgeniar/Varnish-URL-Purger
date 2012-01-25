@@ -58,8 +58,17 @@ $(document).ready(function()
 		// Get the input string, don't sanitize?
 		$txtUrl = $_POST['txtURL'];
 
+		// Validate the input: basic stuff
+		$strpos = strpos($txtUrl, 'http://');
+		if ($strpos === false) {
+			die("Sorry, this doesn't seem like a valid URL input.");
+		}
+
 		// Ok, purge it
 		varnishPurge($txtUrl);
+
+		// End it
+		echo "<br />Request finished.";
 	}
 ?>
 
