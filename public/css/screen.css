@@ -1,0 +1,28 @@
+body {
+	font-family: calibri,tahoma,arial,sans-serif;
+	font-size: 100%;
+}
+
+/* Some styles for basic jQuery stuff */
+/* I got this from http://www.dailycoding.com/Posts/default_text_fields_using_simple_jquery_trick.aspx */
+.defaultText { width: 300px; }
+.defaultTextActive { color: #a1a1a1; font-style: italic; }
+
+/* Some more basic UI stuff */
+h1 {
+	color: #990000;
+	font-size: 150%;
+}
+
+p {
+	width: 540px;
+}
+
+/* Style the submit button */
+.submitButton {
+	border: 1px solid #dedede;
+	font-size: 100%;
+	line-height: 130%;
+	color: #990000;
+	
+}
