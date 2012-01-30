@@ -1,7 +1,15 @@
 <?php
 
-function varnishPurge ($txtUrl) {
-	// Step one: prepare the string, strip the http:// prefix
+/**
+ * varnishPurge
+ *
+ * @param mixed $txtUrl
+ * @access public
+ * @return void
+ */
+function varnishPurge ($txtUrl) 
+{
+    // Step one: prepare the string, strip the http:// prefix
 	$txtUrl = str_replace("http://", "", $txtUrl);
 	
 	// Get the hostname/fqdn and the URL
@@ -16,7 +24,7 @@ function varnishPurge ($txtUrl) {
         	error_log("Varnish connect error: ". $errstr ."(". $errno .")");
 	} else {
 		// Build the request
-        	$cmd = "PURGE ". $url ." HTTP/1.0\r\n";
+       	$cmd = "PURGE ". $url ." HTTP/1.0\r\n";
 		$cmd .= "Host: ". $hostname ."\r\n";
 		$cmd .= "Connection: Close\r\n";
 		// Finish the request
@@ -38,6 +46,32 @@ function varnishPurge ($txtUrl) {
 
 	// Close the socket
 	fclose($varnish_sock);
+}
+
+/**
+ * varnishPurgedSimplifiedExample
+ *
+ * @access public
+ * @return void
+ */
+function varnishPurgedSimplifiedExample ( ) 
+{
+    // Open the socket
+    $errno = ( integer) "";
+    $errstr = ( string) "";
+    $varnish_sock = fsockopen( "127.0.0.1", "80", $errno, $errstr, 10);
+
+    // Prepare the command to send
+    $cmd = "PURGE /some/webpage/of/me.html HTTP/1.0\r\n";
+    $cmd .= "Host: www.mydomain.be\r\n";
+    $cmd .= "Connection: Close\r\n";
+    $cmd .= "\r\n";
+
+    // Send the request
+    fwrite( $varnish_sock, $cmd);
+
+    // Close the socket
+    fclose( $varnish_sock);
 }
 
 ?>
